@@ -1,4 +1,4 @@
-export default infoCards = [
+const infoCards = [
   { color: "#00838f", title: "Latest News", text: "Give me the latest news" },
   {
     color: "#1565c0",
@@ -20,3 +20,5 @@ export default infoCards = [
     text: "Give me the news from CNN",
   },
 ];
+
+export default infoCards;
