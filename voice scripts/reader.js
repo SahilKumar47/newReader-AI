@@ -136,3 +136,10 @@ const confirmation = context(() => {
     p.play("Ok, no problem.");
   });
 });
+
+intent("Open the article number $(number* (.*))", (p) => {
+  if (p.number.value) {
+    p.play(`Opening article ${p.number.value}`);
+    p.play({ command: "open", number: p.number.value });
+  }
+});

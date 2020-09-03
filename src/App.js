@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import NewsCards from "./components/NewsCards/NewsCards";
+import wordsToNumbers from "words-to-numbers";
 
 //MUI Stuff
 import { Typography, Fade } from "@material-ui/core";
@@ -16,27 +17,39 @@ const useStyles = makeStyles({
 
 const alanKey =
   "c1a8d7ed324aaba5b26b897bec4b19192e956eca572e1d8b807a3e2338fdd0dc/stage";
-let alanBtnInstance = null;
 const App = () => {
   const classes = useStyles();
   const [newsArticles, setNewsArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState(-1);
   useEffect(() => {
-    alanBtnInstance = alanBtn({
+    alanBtn({
       key: alanKey,
       onConnectionStatus: (status) => {},
-      onCommand: ({ command, savedArticles }) => {
+      onCommand: ({ command, savedArticles, number }) => {
         if (command === "newHeadlines") {
+          if (savedArticles.length === 0) {
+            alanBtn().playText("sure.");
+          }
           setNewsArticles(savedArticles);
           setActiveArticle(-1);
-        } else if (command == "highlight") {
+        } else if (command === "highlight") {
           setActiveArticle((prevArticle) => prevArticle + 1);
+        } else if (command === "open") {
+          console.log(savedArticles);
+          const parsedNumber = wordsToNumbers(number, { fuzzy: true });
+          console.log(parsedNumber);
+          if (parsedNumber > 20) {
+            console.log(parsedNumber);
+            alanBtn().playText("Please try that again");
+          } else if (savedArticles) {
+            window.open(savedArticles[parsedNumber - 1].url);
+            alanBtn().playText("Opening article....");
+          }
         }
       },
     });
   }, []);
 
-  console.log(newsArticles);
   return (
     <div>
       <Fade in>

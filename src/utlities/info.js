@@ -10,13 +10,14 @@ const infoCards = [
   {
     color: "#4527a0",
     title: "News by Terms",
-    info: "Bitcoin, PlayStation 5, Smartphones, Donald Trump...",
-    text: "What's up with PlayStation 5",
+    info: "Bitcoin, corona virus, Smartphones, Narendra Modi.....",
+    text: "Find me news about Smartphones",
   },
   {
     color: "#283593",
     title: "News by Sources",
-    info: "CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...",
+    info:
+      "CNN, Wired, BBC News, The Times of India, The Hindu, Buzzfeed, ABC News...",
     text: "Give me the news from CNN",
   },
 ];
